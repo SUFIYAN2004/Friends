@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Student</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-200">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl mb-4 text-center font-semibold">Student Details</h1>
+        <div class="bg-white p-6 rounded shadow-md">
+            <p><strong>Name:</strong> {{ student.name }}</p>
+            <p><strong>Roll No:</strong> {{ student.rollno }}</p>
+            <p><strong>Phone:</strong> {{ student.number }}</p>
+            <p><strong>Department:</strong> {{ student.dept }}</p>
+            <p><strong>Address:</strong> {{ student.address }}</p>
+        </div>
+        <div class="mt-4 text-center">
+            <a href="{{ url_for('index') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-200">Back to List</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-200">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+            <h1 class="text-2xl font-semibold text-center mb-6">Create Account</h1>
+            <form action="{{ url_for('signup') }}" method="POST">
+                <input type="text" name="username" placeholder="Username" required class="border border-gray-300 rounded px-4 py-2 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="password" name="password" placeholder="Password" required class="border border-gray-300 rounded px-4 py-2 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-200 w-full">Sign Up</button>
+            </form>
+            <p class="mt-4 text-center">Already have an account? <a href="{{ url_for('login') }}" class="text-blue-500 hover:underline">Login</a></p>
+        </div>
+    </div>
+</body>
+</html>

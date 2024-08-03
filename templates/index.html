@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-200">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl mb-4 text-center font-semibold">Student Management</h1>
+        <a href="{{ url_for('logout') }}" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200">Logout</a>
+
+        <div class="mt-6 bg-white p-4 rounded shadow-md">
+            <h2 class="text-xl mb-2 font-semibold">Add Student</h2>
+            <form action="{{ url_for('add_student') }}" method="POST" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <input type="text" name="name" placeholder="Name" required class="border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" name="rollno" placeholder="Roll No" required class="border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" name="number" placeholder="Phone Number" required class="border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" name="dept" placeholder="Department" required class="border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" name="address" placeholder="Address" required class="border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded col-span-1 sm:col-span-2 hover:bg-blue-600 transition duration-200">Add</button>
+            </form>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="mt-6 bg-white p-4 rounded shadow-md">
+            <h2 class="text-xl mb-2 font-semibold">Search Student</h2>
+            <form action="{{ url_for('index') }}" method="GET" class="flex mb-4">
+                <input type="text" name="query" placeholder="Search by Name or Roll No" value="{{ query }}" class="border rounded px-2 py-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded ml-2 hover:bg-blue-600 transition duration-200">Search</button>
+            </form>
+        </div>
+
+        <div class="mt-6 bg-white p-4 rounded shadow-md">
+            <h2 class="text-xl mb-2 font-semibold">Student List</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-300">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="py-2 px-4 border-b text-left">Name</th>
+                            <th class="py-2 px-4 border-b text-left">Roll No</th>
+                            <th class="py-2 px-4 border-b text-left">Phone</th>
+                            <th class="py-2 px-4 border-b text-left">Department</th>
+                            <th class="py-2 px-4 border-b text-left">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        <tr class="hover:bg-gray-100 transition duration-200">
+                            <td class="py-2 px-4 border-b">{{ student.name }}</td>
+                            <td class="py-2 px-4 border-b">{{ student.rollno }}</td>
+                            <td class="py-2 px-4 border-b">{{ student.number }}</td>
+                            <td class="py-2 px-4 border-b">{{ student.dept }}</td>
+                            <td class="py-2 px-4 border-b">
+                                <div class="flex space-x-2">
+                                    <form action="{{ url_for('delete_student', rollno=student.rollno) }}" method="POST" style="display:inline;">
+                                        <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition duration-200">Delete</button>
+                                    </form>
+                                    <a href="{{ url_for('edit_student', rollno=student.rollno) }}" class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 transition duration-200">Edit</a>
+                                    <a href="{{ url_for('show_student', rollno=student.rollno) }}" class="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 transition duration-200">View</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
